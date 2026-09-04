@@ -1,0 +1,91 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+    # Verify the docs folder exists
+      check-docs-folder:
+    name: Check Docs Folder Existence
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify 'docs' folder exists
+        run: |
+          if [ ! -d "docs" ]; then
+            echo " 'docs' folder is missing from the repository root."
+            exit 1
+          fi
+          echo " 'docs' folder exists!"
+        check-docs-files:
+    name: Check Docs Files Existence
+    runs-on: ubuntu-latest
+    needs: check-docs-folder # Runs only if Job 1 passes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify required files inside 'docs' folder
+        run: |
+          REQUIRED_FILES=(
+            "docs/ERD.pdf"
+            "docs/API Endpoint Plan.pdf"
+            "docs/Race Day SQL.sql"
+          )
+
+          MISSING_FILES=0
+
+          echo "Checking required files..."
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo " Found: $file"
+            else
+              echo " Missing: $file"
+              MISSING_FILES=$((MISSING_FILES + 1))
+            fi
+          done
+
+          if [ $MISSING_FILES -gt 0 ]; then
+            echo ""
+            echo "Error: $MISSING_FILES required file(s) missing from the docs/ folder."
+            exit 1
+          fi
+
+          echo ""
+          echo "All required files are available!"
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
