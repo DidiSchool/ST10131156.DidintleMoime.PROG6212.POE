@@ -32,8 +32,8 @@ jobs:
 
       - name: Check required files
         run: |
-            test -f "Docs/ERD.PDF"||exit 1
-            test -f "Docs/API Endpoint Plan.PDF"||exit 1
+            test -f "Docs/ERD.pdf"||exit 1
+            test -f "Docs/API Endpoint Plan.pdf"||exit 1
             test -f "Docs/Race Day SQL.sql"||exit 1
             
     
