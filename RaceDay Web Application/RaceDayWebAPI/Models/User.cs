@@ -36,6 +36,7 @@ namespace RaceDayWebAPI.Models
         [MaxLength(20)]
         public string? Phone { get; set; }
 
-       
+        public ICollection<Event> Events { get; set; } = new List<Event>();
+        public ICollection<Enrolment> Enrolments { get; set; } = new List<Enrolment>();
     }
 }
