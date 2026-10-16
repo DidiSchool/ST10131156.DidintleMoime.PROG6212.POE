@@ -1,4 +1,4 @@
-﻿// Controllers/UsersController.cs
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDayWebAPI.Data;

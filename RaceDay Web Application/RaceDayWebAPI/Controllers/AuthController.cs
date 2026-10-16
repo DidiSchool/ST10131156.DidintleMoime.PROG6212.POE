@@ -1,4 +1,4 @@
-﻿// Controllers/AuthController.cs
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
