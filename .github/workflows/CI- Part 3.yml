@@ -29,7 +29,7 @@ jobs:
       - name: Verify files exist
         run: |
           REQUIRED_FILES=(
-            "Docs/erd.pdf"
+            "Docs/ERD.pdf"
             "Docs/API Endpoint plan.pdf"
             "Docs/Race Day SQL.sql"
           )
