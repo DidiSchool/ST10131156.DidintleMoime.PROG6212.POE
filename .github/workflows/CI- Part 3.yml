@@ -30,7 +30,7 @@ jobs:
         run: |
           REQUIRED_FILES=(
             "Docs/ERD.pdf"
-            "Docs/API Endpoint plan.pdf"
+            "Docs/API Endpoint Plan.pdf"
             "Docs/Race Day SQL.sql"
           )
           for file in "${REQUIRED_FILES[@]}"; do
